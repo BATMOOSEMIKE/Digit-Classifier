@@ -38,7 +38,7 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 model.fit(x=x_train,y=y_train, epochs=10)
 
-model.evaluate(x_test, y_test)
+print(model.evaluate(x_test, y_test))
 
 #Save model as HDF5 file for use in digit classifier
 model.save('digit_classifier.h5')

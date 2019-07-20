@@ -1,13 +1,13 @@
 from keras.models import load_model
 from PIL import Image, ImageFilter
 from keras.preprocessing import image
-from keras.preprocessing.image import img_to_array
+from keras.preprocessing.image import img_to_array, load_img
 import numpy as np
 
 model = load_model('digit_classifier.h5')
 
-
-img = Image.open('sample3.png').convert('L')
+'''
+img = Image.open('newsample5.png').convert('L')
 width = float(img.size[0])
 height = float(img.size[1])
 convertedImage = Image.new('L', (28, 28), (255))  
@@ -30,9 +30,19 @@ else:
     convertedImage.paste(img, (wleft, 4))  # paste resized image on white canvas
 
 array = np.array(convertedImage)
-array = array.reshape(1, 28, 28, 1)
 array = array.astype('float32')
+array = array.reshape(1, 28, 28, 1)
 array /= 255
 
-pred = model.predict(array)
+'''
+
+img = load_img('sample5.png', color_mode = "grayscale", target_size=(28,28))
+img = img_to_array(img)
+img = img.reshape(1, 28, 28, 1)
+img = img.astype('float32')
+img = img/255.0
+
+
+
+pred = model.predict(img)
 print(pred.argmax())
